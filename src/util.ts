@@ -1,8 +1,8 @@
 export const isArray = Array.isArray
 
-export const isFunction = (input: any) => typeof input === 'function'
+export const isFunction = (input: any): input is Function => typeof input === 'function'
 
-export const isObject = (input: any) => {
+export const isObject = (input: any): input is Object => {
   if (typeof input !== 'object' || input === null) return false
 
   let proto = input
@@ -13,4 +13,5 @@ export const isObject = (input: any) => {
   return Object.getPrototypeOf(input) === proto
 }
 
-export const isThenable = (input: any) => !!(input && typeof input.then === 'function')
+export const isThenable = (input: any): input is Promise<any> =>
+  !!(input && typeof input.then === 'function')
